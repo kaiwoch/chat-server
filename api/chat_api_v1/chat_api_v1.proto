@@ -1,0 +1,32 @@
+syntax="proto3";
+
+package chat_api_v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/KamigamiNoGigan/chat-server/pkg/chat_api_v1;chat_api_v1";
+
+service ChatApi {
+	rpc Create(CreateRequest) returns (CreateResponse);
+	rpc Delete(DeleteRequest) returns (google.protobuf.Empty);
+	rpc SendMessage(SMRequest) returns (google.protobuf.Empty);
+}
+
+message CreateRequest {
+	repeated string usernames = 1;
+}
+
+message CreateResponse {
+	int64 id = 1;
+}
+
+message DeleteRequest {
+	int64 id = 1;
+}
+
+message SMRequest {
+	string from = 1;
+	string text = 2;
+	google.protobuf.Timestamp timestamp = 3;
+}
